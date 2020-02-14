@@ -36,8 +36,7 @@ class Form extends Component {
     const { imgUrl, name, price } = this.state;
     axios
       .post("/api/product", { newImg: imgUrl, newName: name, newPrice: price })
-      .then(() => this.props.getInventory()
-        .then(() => this.clearInputs()))
+      .then(() => this.props.getInventory().then(() => this.clearInputs()))
       .catch(err => console.log(err));
   };
 
@@ -52,29 +51,30 @@ class Form extends Component {
   render() {
     return (
       <div>
-        <img 
-        value={this.state.imgUrl} 
-        alt="" 
-        style={{ height: "200px", width: "300px", backgroundSize: "cover"}}
+        <img
+          value={this.state.imgUrl}
+          alt=""
+          style={{ height: "200px", width: "300px", backgroundSize: "cover" }}
         />
         <section>
           <div>
             <label>Image URL:</label>
-            <input 
-            type="url"
-            onChange={this.addImage}
+            <input
+              value={this.state.imgUrl}
+              type="url"
+              onChange={this.addImage}
             />
             <label>Product Name:</label>
             <input
-            value={this.state.name}
-            type="text"
-            onChange={this.addName}
-             />
+              value={this.state.name}
+              type="text"
+              onChange={this.addName}
+            />
             <label>Price:</label>
-            <input 
-            value={this.state.price}
-            type="number"
-            onChange={this.addPrice}
+            <input
+              value={this.state.price}
+              type="number"
+              onChange={this.addPrice}
             />
             <span>
               <button onClick={this.clearInputs}>Cancel</button>

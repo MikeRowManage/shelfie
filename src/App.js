@@ -9,20 +9,19 @@ class App extends Component {
     super()
 
     this.state = {
-      inventory: []
+      inventory: [{
+        imgUrl: "a;lskdjf",
+        name: "laskjdf",
+        price: 9
+      }]
     }
   }
 
-componentDidMount() {
-  this.getInventory()
-}
-
-getInventory = () => {
-  axios.get('/api/inventory')
-  .then(res => this.setState({
+componentDidMount = () => {
+  axios.get('/api/inventory').then(res => this.setState({
     inventory: res.data
-  }))
-}
+    })
+  )}
 
   render() {
     return(
@@ -32,7 +31,7 @@ getInventory = () => {
       inventory={this.state.inventory}
       getInventory={this.getInventory}
        />
-      <Form />
+      <Form getInventory={this.getInventory}/>
     </div>
     )}
 }

@@ -4,7 +4,7 @@ module.exports = {
 
     dbInstance
       .get_inventory()
-      .then(inventory => res.status(200).send(inventory))
+      .then(products => res.status(200).send(products))
       .catch(err => {
         console.log(err);
         res.status(500).send(err);
