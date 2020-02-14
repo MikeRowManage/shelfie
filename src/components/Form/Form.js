@@ -19,11 +19,13 @@ class Form extends Component {
       imgUrl: event.target.value
     });
   };
+
   addName = event => {
     this.setState({
       name: event.target.value
     });
   };
+
   addPrice(event) {
     this.setState({
       price: event.target.value
@@ -34,45 +36,49 @@ class Form extends Component {
     const { imgUrl, name, price } = this.state;
     axios
       .post("/api/product", { newImg: imgUrl, newName: name, newPrice: price })
-      .then(() => this.props.getProducts())
+      .then(() => this.props.getInventory()
+        .then(() => this.clearInputs()))
       .catch(err => console.log(err));
   };
 
   clearInputs = event => {
     this.setState({
-      imgUrl: null,
-      name: null,
-      price: null
+      imgUrl: "",
+      name: "",
+      price: 0
     });
   };
 
   render() {
     return (
       <div>
-        <img alt="" />
+        <img 
+        value={this.state.imgUrl} 
+        alt="" 
+        style={{ height: "200px", width: "300px", backgroundSize: "cover"}}
+        />
         <section>
           <div>
             <label>Image URL:</label>
             <input 
-            value={this.state.imgUrl}
             type="url"
             onChange={this.addImage}
             />
             <label>Product Name:</label>
             <input
             value={this.state.name}
-            type="url"
+            type="text"
             onChange={this.addName}
              />
             <label>Price:</label>
             <input 
             value={this.state.price}
-            type="url"
+            type="number"
             onChange={this.addPrice}
             />
             <span>
               <button onClick={this.clearInputs}>Cancel</button>
-              <button>Add to Inventory</button>
+              <button onClick={this.addToInventory}>Add to Inventory</button>
             </span>
           </div>
         </section>

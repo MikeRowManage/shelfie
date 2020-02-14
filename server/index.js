@@ -7,6 +7,9 @@ const app = express();
 
 app.use(express.json());
 
+app.get('/api/inventory', ctrl.getInventory)
+app.post('/api/product', ctrl.addInventory)
+
 massive(CONNECTION_STRING)
   .then(dbInstance => {
     app.set("db", dbInstance);
