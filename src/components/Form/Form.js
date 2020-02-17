@@ -36,8 +36,10 @@ class Form extends Component {
     const { imgUrl, name, price } = this.state;
     axios
       .post("/api/product", { newImg: imgUrl, newName: name, newPrice: price })
-      .then(() => this.props.getInventory().then(() => this.clearInputs()))
+      .then(() => this.props.getInventory())
       .catch(err => console.log(err));
+
+      this.clearInputs()
   };
 
   clearInputs = event => {
@@ -47,6 +49,7 @@ class Form extends Component {
       price: 0
     });
   };
+
 
   render() {
     return (
@@ -78,7 +81,10 @@ class Form extends Component {
             />
             <span>
               <button onClick={this.clearInputs}>Cancel</button>
-              <button onClick={this.addToInventory}>Add to Inventory</button>
+              <button 
+              onClick={this.addToInventory}
+              
+              >Add to Inventory</button>
             </span>
           </div>
         </section>

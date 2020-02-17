@@ -9,11 +9,12 @@ app.use(express.json());
 
 app.get('/api/inventory', ctrl.getInventory)
 app.post('/api/product', ctrl.addInventory)
+app.delete('/api/product/:id', ctrl.deleteProduct)
 
 massive(CONNECTION_STRING)
   .then(dbInstance => {
     app.set("db", dbInstance);
-    console.log("|---DATABASE IS A GO!");
+    console.log("|---DATABASE IS A GO!--|");
     app.listen(SERVER_PORT, () => {
       console.log(`|---SERVER IS A GO FOR PORT: ${SERVER_PORT}---|`);
     });
